@@ -187,3 +187,103 @@ function hasEmptyTile() {
     }
     return false;
 }
+
+// Define quiz questions and answers
+const quizQuestions = [
+    { question: "What is 2 + 2?", options: ["3", "4", "5", "6"], answer: "4" },
+    { question: "What is 5 * 3?", options: ["10", "15", "20", "25"], answer: "15" },
+   {question: "What is 8 multiplied by 4?", answer: "32", type: "open_ended" },
+    { question: "What is 15 divided by 3?", answer: "5", type: "open_ended" },
+    { question: "What is the value of pi (π) to two decimal places?", answer: "3.14", type: "open_ended" },
+    { question: "What is 10 / 2?", options: ["2", "4", "5", "10"], answer: "5" },
+    { question: "What is the square root of 9?", options: ["3", "6", "9", "12"], answer: "3" },
+    { question: "What is 3 squared?", options: ["6", "9", "12", "15"], answer: "9" },
+    { question: "What is 4 cubed?", options: ["12", "16", "32", "64"], answer: "64" },
+    { question: "What is 10 - 7?", options: ["1", "2", "3", "4"], answer: "3" },
+    { question: "What is 20 % of 50?", options: ["5", "10", "15", "20"], answer: "10" },
+    { question: "What is the next number in the sequence: 2, 4, 6, 8, ...?", options: ["10", "11", "12", "14"], answer: "10" },
+    { question: "What is 15 squared?", options: ["225", "250", "275", "300"], answer: "225" },
+    { question: "What is the value of pi (π) rounded to two decimal places?", options: ["3.14", "3.16", "3.18", "3.20"], answer: "3.14" },
+    { question: "What is 100 divided by 5?", options: ["15", "20", "25", "30"], answer: "20" },
+    { question: "What is the area of a rectangle with length 6 and width 8?", options: ["30", "36", "42", "48"], answer: "48" },
+    { question: "What is 7 multiplied by itself?", options: ["35", "42", "49", "56"], answer: "49" }
+    // Add more quiz questions here
+];
+
+let currentQuestionIndex = 0;
+
+// Function to display current quiz question
+function displayQuestion() {
+
+    document.getElementById("quiz").style.display = "block";
+    const questionElement = document.getElementById("question");
+    const optionsElement = document.getElementById("options");
+    const currentQuestion = quizQuestions[currentQuestionIndex];
+
+    questionElement.textContent = currentQuestion.question;
+    optionsElement.innerHTML = ""; // Clear previous options
+
+    currentQuestion.options.forEach((option, index) => {
+        const optionButton = document.createElement("button");
+        optionButton.textContent = option;
+        optionButton.onclick = () => selectOption(option);
+        optionsElement.appendChild(optionButton);
+    });
+
+    // Set timeout to move to next question after 30 seconds
+   
+}
+
+// Function to select an option
+function selectOption(option) {
+
+    const currentQuestion = quizQuestions[currentQuestionIndex];
+    const userAnswer = option;
+
+    if (userAnswer === currentQuestion.answer) {
+        alert("Correct! You earned a Super Point.");
+        document.getElementById("quiz").style.display = "none";
+        awardSuperPoint();
+    } else {
+        alert("Incorrect answer. Try again later.");
+    }
+
+    // Move to the next question
+    nextQuestion();
+}
+
+// Function to move to the next question
+function nextQuestion() {
+
+    currentQuestionIndex++;
+    if (currentQuestionIndex < quizQuestions.length) {
+        setTimeout( displayQuestion, 30000);
+
+    } else {
+        endQuiz();
+    }
+}
+
+// Function to award a Super Point
+function awardSuperPoint() {
+
+    score+=5;
+    // Update score display
+    document.getElementById("score").innerText = score;
+}
+
+// Function to start the quiz
+function startQuiz() {
+
+    displayQuestion();
+    document.getElementById("quiz").style.display = "block";
+}
+
+// Function to end the quiz
+function endQuiz() {
+
+    document.getElementById("quiz").style.display = "none";
+}
+
+// Call startQuiz function after 30 seconds
+setTimeout(startQuiz, 30000);

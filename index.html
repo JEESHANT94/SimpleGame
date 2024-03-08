@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>2048</title>
-        <link rel="stylesheet" href="style.css">
-        <script src="main.js"></script>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2048</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="quiz.css">
+    <script src="main.js" defer></script>
+</head>
 
-    <body>
-        <h1>Our Goal to make tile 2048</h1>
-        <hr>
-        <h2>Score: <span id="score">0</span></h2>
-        <div id="board">
+<body>
+    <h1>Our Goal to make tile 2048</h1>
+    <hr>
+    <h2>Score: <span id="score">0</span></h2>
+    <div id="board">
+    </div>
+    <div id="quiz" class="quiz-container"> <!-- Quiz container -->
+        <div class="question-container">
+            <h2 id="question" class="question-text"></h2> <!-- Question display -->
+            <div id="options" class="options-container"></div> <!-- Options display -->
         </div>
-    </body>
+    </div>
+</body>
 </html>
